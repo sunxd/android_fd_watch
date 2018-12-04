@@ -12,7 +12,7 @@ GREEN='\033[32m'
 FD_LIMIT=$(( $(adb shell ulimit -n) ))
 WARN_THRESHOLD=$(( ${FD_LIMIT} / 2 ))
 ERROR_THRESHOLD=$(( ${FD_LIMIT} / 3 * 2 ))
-echo -e "FD_LIMIT ${FD_LIMIT}, WILL WARN WHEN FD > ${YELLOW}${WARN_THRESHOLD}${CLEAR} ADN FD > ${RED}${WARN_THRESHOLD}${CLEAR}"
+echo -e "FD_LIMIT ${FD_LIMIT}, WILL WARN WHEN FD > ${YELLOW}${WARN_THRESHOLD}${CLEAR} ADN FD > ${RED}${ERROR_THRESHOLD}${CLEAR}"
 
 APP_PID=$(( $(adb shell ps | grep -e "${APPID}$" | awk '{print $2}') ))
 
@@ -28,7 +28,7 @@ do
 	else
 		echo -e "Watching App ${GREEN}${APPID}<${APP_PID}>${CLEAR}, Current FD ${GREEN}${APP_FD}${CLEAR}. Press CTRL+C to stop."
 	fi
-	sleep ${2}
+	sleep $DELAY
 done
 
 
